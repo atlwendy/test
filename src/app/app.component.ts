@@ -23,65 +23,6 @@ const currentDate: Date = new Date();
 export class AppComponent {
   title = 'test';
 
-  public formGroup = this.formBuilder.group({
-    dateRange: this.formBuilder.group({
-      startDate: [''],
-      endDate: [''],
-    }),
-    cohort: new FormControl([]),
-  });
-
-  public get cohortControl(): FormControl {
-    return this.formGroup.get('cohort') as FormControl;
-  }
-
-  public formatter(cohort: TsDateCohort): string {
-    return cohort.display;
-  }
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private validatorsService: TsValidatorsService,
-  ) {
-
-  }
-
-  public myForm: FormGroup = this.formBuilder.group({
-    dateRange: this.formBuilder.group({
-      startDate: [
-        null,
-        [
-          Validators.required,
-        ],
-      ],
-      endDate: [
-        null,
-        [Validators.required],
-      ],
-    }),
-  });
-  public constraintForm: FormGroup = this.formBuilder.group({
-    startDateRange: this.formBuilder.group({
-      startDate: [
-        startOfDay(subDays(new Date(), 120)),
-        [Validators.required],
-      ],
-      endDate: [
-        startOfDay(subDays(new Date(), 1)),
-        [Validators.required],
-      ],
-    }),
-    endDateRange: this.formBuilder.group({
-      startDate: [
-        startOfDay(subDays(new Date(), 119)),
-        [Validators.required],
-      ],
-      endDate: [
-        endOfDay(new Date()),
-        [Validators.required],
-      ],
-    }),
-  });
   public cohorts: TsDateCohort[] = [
     {
       display: 'Last 90 days',
@@ -99,10 +40,4 @@ export class AppComponent {
       active: true,
     },
   ];
-  public lastRange: TsCohortDateRangeChanged | undefined;
-
-  public printRange(value: TsCohortDateRangeChanged): void {
-    // console.log('DEMO: formValue: ', value);
-    this.lastRange = value;
-  }
 }
